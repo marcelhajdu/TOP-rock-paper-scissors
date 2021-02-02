@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+<script>
+	function computerPlay() {
+		const arr = ['rock', 'paper', 'scissors'];
+		return arr[Math.floor(Math.random() * (3 - 0) + 0)]
+	}
+
+	function playRound(playerSelection, computerSelection) {
+		let counter = 0;
+		playerSelection = playerSelection.toLowerCase();
+		computerSelection = computerSelection.toLowerCase();
+		if((playerSelection === 'scissors' && computerSelection === 'paper') ||
+		 (playerSelection === 'paper' && computerSelection === 'rock') || 
+		 (playerSelection === 'rock' && computerSelection === 'scissors')) {
+			 console.log(`You won! ${playerSelection} beats ${computerSelection}!`);
+			 counter++;
+		 } else if((computerSelection === 'rock' && playerSelection === 'scissors') ||
+		 (computerSelection === 'paper' && playerSelection === 'rock') || 
+		 (computerSelection === 'scissors' && playerSelection === 'paper')){
+			console.log(`You lost! ${computerSelection} beats ${playerSelection}!`);
+			counter--;
+		 } else {
+			 console.log('Draw!');
+		 }
+		 return counter;
+	}
+	
+	function game() {
+		let mainCounter = 0;
+		for(let i = 0; i < 5; i++) {
+			let playerSelection = window.prompt(`Type in your choice`);
+			let computerSelection = computerPlay();
+			mainCounter += playRound(playerSelection, computerSelection);
+		}
+		if(mainCounter > 0) {
+			console.log(`Congratulations! You won! Your overall score is ${mainCounter}`);
+		} else if( mainCounter < 0) {
+			console.log(`You lost! Better luck next time! Your overall score is ${mainCounter}`);
+		} else {
+			console.log('Draw!');
+		}
+	}
+
+	game();
+
+</script>
+</body>
+</html>
