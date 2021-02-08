@@ -6,19 +6,12 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-
-	<div id="container">
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-</div>
-
+	<div id = 'container'>
+    <button id="Rock">Rock</button>
+    <button id="Paper">Paper</button>
+    <button id="Scissors">Scissors</button>
+	</div>
 <script>
-
-	const buttons = document.querySelectorAll('button');
-
-	
-	
 	function computerPlay() {
 		const arr = ['rock', 'paper', 'scissors'];
 		return arr[Math.floor(Math.random() * (3 - 0) + 0)]
@@ -29,7 +22,7 @@
 		playerSelection = playerSelection.toLowerCase();
 		computerSelection = computerSelection.toLowerCase();
 		if((playerSelection === 'scissors' && computerSelection === 'paper') ||
-		(playerSelection === 'paper' && computerSelection === 'rock') || 
+		 (playerSelection === 'paper' && computerSelection === 'rock') || 
 		 (playerSelection === 'rock' && computerSelection === 'scissors')) {
 			 console.log(`You won! ${playerSelection} beats ${computerSelection}!`);
 			 counter++;
@@ -38,28 +31,17 @@
 		 (computerSelection === 'scissors' && playerSelection === 'paper')){
 			console.log(`You lost! ${computerSelection} beats ${playerSelection}!`);
 			counter--;
-		} else {
+		 } else {
 			 console.log('Draw!');
-			}
-			return counter;
-		}
-		
-		function game() {
-			let mainCounter = 0;
-			buttons.forEach((button) => {
-				button.addEventListener('click', () => {
-					mainCounter += playRound(button.id, computerPlay());
-					console.log(mainCounter);
-				});
-			});
-		}
-
-		/*
-		function game() {
-			let mainCounter = 0;
-			for(let i = 0; i < 5; i++) {
-				let playerSelection = window.prompt(`Type in your choice`);
-				let computerSelection = computerPlay();
+		 }
+		 return counter;
+	}
+	
+	function game() {
+		let mainCounter = 0;
+		for(let i = 0; i < 5; i++) {
+			let playerSelection = window.prompt(`Type in your choice`);
+			let computerSelection = computerPlay();
 			mainCounter += playRound(playerSelection, computerSelection);
 		}
 		if(mainCounter > 0) {
@@ -69,11 +51,33 @@
 		} else {
 			console.log('Draw!');
 		}
+	}
+
+	const buttons = document.querySelectorAll('button');
+	let mainCounter = 0;
+	buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    mainCounter += playRound(button.id, computerPlay());
+		const container = document.getElementById('container');
+		let div = document.createElement('div');
+		div.textContent = mainCounter;
+		container.appendChild(div)
+		if(mainCounter === 5) {
+			let p = document.createElement('p');
+			p.textContent = 'You won the game';
+			container.appendChild(p);
+			console.log('you won the game');
+		} else if(mainCounter === -5) {
+			let p = document.createElement('p');
+			p.textContent = 'You lost the game';
+			container.appendChild(p);
+			console.log('lost the game');
 		}
-		*/
-	
-	game();
-	
+  });
+});
+
+	//game();
+
 </script>
 </body>
 </html>
